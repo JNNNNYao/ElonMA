@@ -1,0 +1,4 @@
+discord.py==1.7.3
+pika==1.2.1
+Pillow==9.1.1
+tweepy==4.9.0
