@@ -26,13 +26,13 @@ class Bot(discord.Client):
         self.channels = []
         self.img_buffer = io.BytesIO()
         # rabbitMQ: send
-        self.connection = pika.BlockingConnection(pika.ConnectionParameters(host=rabbitmq_ip))
+        self.connection = pika.BlockingConnection(pika.ConnectionParameters(host=rabbitmq_ip, port=5672))
         self.rabbitMQ_channel = self.connection.channel()
         self.rabbitMQ_channel.queue_declare(queue='bot2model')
         self.send_heartbeats.start()
         # rabbitMQ: recv
         def job(bot):
-            connection = pika.BlockingConnection(pika.ConnectionParameters(host=rabbitmq_ip))
+            connection = pika.BlockingConnection(pika.ConnectionParameters(host=rabbitmq_ip, port=5672))
             channel = connection.channel()
             channel.queue_declare(queue='model2bot')
             def callback(ch, method, properties, body):
