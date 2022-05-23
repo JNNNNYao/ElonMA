@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: discord-bot
+  labels:
+    app: discord-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: discord-app
+  template:
+    metadata:
+      labels:
+        app: discord-app 
+    spec:
+      containers:
+      - name: discord-app
+        image: albert037037037/cc-discord-bot:v0.0.3
+        ports:
+        - containerPort: 8080
+        imagePullPolicy: IfNotPresent
+        resources:
+            limits:
+              cpu: 200m
+              memory: 400Mi
+            requests:
+              cpu: 100m
+              memory: 200Mi
+        env:
+          - name: bot_token
+            valueFrom:
+              secretKeyRef:
+                name: bot-secret-env
+                key: botToken
+          - name: bearer_token
+            valueFrom:
+              secretKeyRef:
+                name: bot-secret-env
+                key: bearerToken
+          - name: rabbitmq_ip
+            valueFrom:
+              secretKeyRef:
+                name: bot-secret-env
+                key: rabbitIP
