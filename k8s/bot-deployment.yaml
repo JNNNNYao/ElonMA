@@ -4,6 +4,10 @@ metadata:
   name: discord-bot
   labels:
     app: discord-app
+    keel.sh/policy: all
+    keel.sh/trigger: poll
+  annotations:
+      keel.sh/pollSchedule: "@every 1m"
 spec:
   replicas: 1
   selector:
