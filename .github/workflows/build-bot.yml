@@ -35,4 +35,4 @@ jobs:
         with:
           context: ./bot
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/bot:${{ env.APP_VERSION }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/cc-discord-bot:${{ env.APP_VERSION }}
