@@ -37,7 +37,7 @@ class Bot(discord.Client):
             channel.queue_declare(queue='model2bot')
             def callback(ch, method, properties, body):
                 Payload = body.decode("utf-8")
-                channel_id, img = Payload.split('+++')
+                channel_id, img = Payload.split(' +++ ')
                 img = ast.literal_eval(img)
                 bot.dispatch("recv_image", channel_id, img)
             channel.basic_consume(queue='model2bot', on_message_callback=callback, auto_ack=True)
@@ -110,7 +110,7 @@ class Bot(discord.Client):
             print('communication: bot to model')
             print(message.channel.id)
             print(message.attachments[0].url)
-            self.rabbitMQ_channel.basic_publish(exchange='', routing_key='bot2model', body=str(message.channel.id)+'+++'+str(message.attachments[0].url))
+            self.rabbitMQ_channel.basic_publish(exchange='', routing_key='bot2model', body=str(message.channel.id)+' +++ '+str(message.attachments[0].url))
         else:
             await message.reply('unknown command!', mention_author=True)
 
