@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Discord Bot</title>
+    <link>http://jnnnnyao.github.io/ElonMA/</link>
+    <description>Recent content on Discord Bot</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="http://jnnnnyao.github.io/ElonMA/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Crawling</title>
+      <link>http://jnnnnyao.github.io/ElonMA/crawling/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://jnnnnyao.github.io/ElonMA/crawling/</guid>
+      <description>This Discord bot can crawl all Elon Musk&amp;rsquo;s activities on Twitter. It will check if there are any tweets, retweets, or replies by Elon Musk every 60 seconds.
+Start the crawling process: ?crawling Stop the crawling process: ?stop_crawling </description>
+    </item>
+    
+    <item>
+      <title>Image editing</title>
+      <link>http://jnnnnyao.github.io/ElonMA/image_editing/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://jnnnnyao.github.io/ElonMA/image_editing/</guid>
+      <description>We can change your face to Elon Ma. Everyone can be Elon Ma!
+Attach an image and enter the following command: ?image </description>
+    </item>
+    
+  </channel>
+</rss>
