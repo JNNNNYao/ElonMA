@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: discord-app
-        image: albert037037037/cc-discord-bot:v0.0.3
+        image: albert037037037/cc-discord-bot:v0.1.6
         ports:
         - containerPort: 8080
         imagePullPolicy: IfNotPresent

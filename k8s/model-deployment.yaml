@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: elonma-model
+  labels:
+    app: elonma-model
+    keel.sh/policy: all
+    keel.sh/trigger: poll
+  annotations:
+      keel.sh/pollSchedule: "@every 1m"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: elonma-model
+  template:
+    metadata:
+      labels:
+        app: elonma-model 
+    spec:
+      containers:
+      - name: elonma-model
+        image: albert037037037/cc-model:v0.2.2
+        ports:
+        - containerPort: 8081
+        imagePullPolicy: IfNotPresent
+        resources:
+            limits:
+              cpu: 500m
+              memory: 8G
+              nvidia.com/gpu: "1"
+            requests:
+              cpu: 250m
+              memory: 4G
+              nvidia.com/gpu: "1"
+            
+        env:
+          - name: TZ
+            value: "UTC"
