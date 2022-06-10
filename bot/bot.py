@@ -24,7 +24,6 @@ class Bot(discord.Client):
         super().__init__(*args, **kwargs)
         self.most_recent_tweet_id = None
         self.channels = []
-        self.img_buffer = io.BytesIO()
         # rabbitMQ: send
         self.connection = pika.BlockingConnection(pika.ConnectionParameters(host=rabbitmq_ip, port=5672))
         self.rabbitMQ_channel = self.connection.channel()
@@ -48,9 +47,10 @@ class Bot(discord.Client):
     async def on_recv_image(self, channel_id, img):
         print("communication: model to bot")
         print('sending image to channel {}'.format(channel_id))
-        self.img_buffer.write(img)
-        self.img_buffer.seek(0)
-        file = discord.File(fp=self.img_buffer, filename='image.png')
+        img_buffer = io.BytesIO()
+        img_buffer.write(img)
+        img_buffer.seek(0)
+        file = discord.File(fp=img_buffer, filename='image.png')
         channel = self.get_channel(int(channel_id))
         await channel.send("Lmfao", file=file)
 

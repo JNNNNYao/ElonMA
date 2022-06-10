@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: elonma-model
-        image: albert037037037/cc-model:v0.1.8
+        image: albert037037037/cc-model:v0.2.2
         ports:
         - containerPort: 8081
         imagePullPolicy: IfNotPresent

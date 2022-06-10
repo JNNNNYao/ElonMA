@@ -1,0 +1,48 @@
+baseURL: http://jnnnnyao.github.io/ElonMA/
+languageCode: en-us
+title: Discord Bot
+theme: hugo-fresh
+googleAnalytics: # Put in your tracking code without quotes like this: UA-XXXXXX...
+# Disables warnings
+disableKinds:
+- taxonomy
+- taxonomyTerm
+markup:
+  goldmark:
+    renderer:
+      unsafe: true # Allows you to write raw html in your md files
+
+params:
+  # Open graph allows easy social sharing. If you don't want it you can set it to false or just delete the variable
+  openGraph: true
+  # Used as meta data; describe your site to make Google Bots happy
+  description:
+  font:
+    name: "Open Sans"
+    sizes: [400,600]
+  hero:
+    # Main hero title
+    title: Elon Ma
+    # Hero subtitle (optional)
+    subtitle: With Elon MA in your Discord server, you can get the latest update from Elon Musk on Twitter and create meme images.
+    # Button text
+    buttontext: Add to Discord
+    # Where the main hero button links to
+    buttonlink: "https://discord.com/api/oauth2/authorize?client_id=973464497618583582&permissions=1644436126784&scope=bot"
+    # Hero image (from static/images/___)
+    image: illustrations/musk_meme.svg
+  # Customizable navbar. For a dropdown, add a "sublinks" list.
+  navbar:
+  - title: Elon Ma
+    url: /ElonMA
+    button: true
+  sidebar:
+    # Logo (from /images/logos/___.svg)
+    logo: m
+    sections:
+    - title: Usage
+      links:
+      - text: crawling
+        url: /ElonMA/crawling
+      - text: image editing
+        url: /ElonMA/image_editing
