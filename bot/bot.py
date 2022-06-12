@@ -1,6 +1,8 @@
 import os
 import io
 import ast
+import json
+import requests
 from threading import Thread
 
 import pika
@@ -20,6 +22,10 @@ user_id_demo = 1362728065864884224
 tweet_url = 'https://twitter.com/elonmusk/status/'
 tweet_url_demo = 'https://twitter.com/william36253736/status/'
 # tweet_url = 'https://twitter.com/FoxNews/status/'   # testing
+
+# Defining Binance API URL
+key = "https://api.binance.com/api/v3/ticker/price?symbol="
+currencies = "DOGEUSDT"
 
 class Bot(discord.Client):
     def __init__(self, *args, **kwargs):
@@ -116,6 +122,11 @@ class Bot(discord.Client):
             print(message.channel.id)
             print(message.attachments[0].url)
             self.rabbitMQ_channel.basic_publish(exchange='', routing_key='bot2model', body=str(message.channel.id)+' +++ '+str(message.attachments[0].url))
+        elif cmd == 'doge':
+            url = key+currencies  
+            data = requests.get(url)
+            data = data.json()
+            await message.reply('current DOGE coin price: {}'.format(data['price']), mention_author=True)
         else:
             await message.reply('unknown command!', mention_author=True)
 
