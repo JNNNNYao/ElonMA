@@ -15,14 +15,17 @@ bearer_token = os.environ['bearer_token']
 
 crawler = tweepy.Client(bearer_token)
 user_id = 44196397  # @elonmusk
+user_id_demo = 1362728065864884224
 # user_id = 1367531   # @FoxNews, testing
 tweet_url = 'https://twitter.com/elonmusk/status/'
+tweet_url_demo = 'https://twitter.com/william36253736/status/'
 # tweet_url = 'https://twitter.com/FoxNews/status/'   # testing
 
 class Bot(discord.Client):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.most_recent_tweet_id = None
+        self.most_recent_tweet_id_demo = None
         self.channels = []
         # rabbitMQ: send
         self.connection = pika.BlockingConnection(pika.ConnectionParameters(host=rabbitmq_ip, port=5672))
@@ -90,6 +93,8 @@ class Bot(discord.Client):
                 # get the most recent tweet id
                 response = crawler.get_users_tweets(user_id, max_results=5)
                 self.most_recent_tweet_id = response.data[0].id
+                response_demo = crawler.get_users_tweets(user_id_demo, max_results=5)
+                self.most_recent_tweet_id_demo = response_demo.data[0].id
                 # start task
                 self.get_tweets.start()
             await message.reply('start crawling!', mention_author=True)
@@ -118,13 +123,23 @@ class Bot(discord.Client):
     async def send_heartbeats(self):
         self.connection.process_data_events()
 
-    @tasks.loop(seconds=60) # task runs every 60 seconds
+    @tasks.loop(seconds=30) # task runs every 30 seconds
     async def get_tweets(self):
         response = crawler.get_users_tweets(user_id, since_id=self.most_recent_tweet_id)
         print("most_recent_tweet_id: {}".format(self.most_recent_tweet_id))
         if response.data is not None:
             self.most_recent_tweet_id = response.data[0].id
             for tweet in response.data:
+                print(tweet.id)
+                print(tweet.text)
+                for channel_ID in self.channels:
+                    channel = self.get_channel(channel_ID)
+                    await channel.send(tweet_url+str(tweet.id))
+        response_demo = crawler.get_users_tweets(user_id_demo, since_id=self.most_recent_tweet_id_demo)
+        print("most_recent_tweet_id_demo: {}".format(self.most_recent_tweet_id_demo))
+        if response_demo.data is not None:
+            self.most_recent_tweet_id_demo = response_demo.data[0].id
+            for tweet in response_demo.data:
                 print(tweet.id)
                 print(tweet.text)
                 for channel_ID in self.channels:
