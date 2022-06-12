@@ -14,10 +14,10 @@ rabbitmq_ip = os.environ['rabbitmq_ip']
 bearer_token = os.environ['bearer_token']
 
 crawler = tweepy.Client(bearer_token)
-# user_id = 44196397  # @elonmusk
-user_id = 1367531   # @FoxNews, testing
-# tweet_url = 'https://twitter.com/elonmusk/status/'
-tweet_url = 'https://twitter.com/FoxNews/status/'   # testing
+user_id = 44196397  # @elonmusk
+# user_id = 1367531   # @FoxNews, testing
+tweet_url = 'https://twitter.com/elonmusk/status/'
+# tweet_url = 'https://twitter.com/FoxNews/status/'   # testing
 
 class Bot(discord.Client):
     def __init__(self, *args, **kwargs):
