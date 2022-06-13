@@ -122,8 +122,8 @@ class Bot(discord.Client):
             print(message.channel.id)
             print(message.attachments[0].url)
             self.rabbitMQ_channel.basic_publish(exchange='', routing_key='bot2model', body=str(message.channel.id)+' +++ '+str(message.attachments[0].url))
-        # elif cmd == 'CD':
-        #     await message.reply("Hi, everyone, I'm Elon Ma.", mention_author=True)
+        elif cmd == 'CD':
+            await message.reply("Hi, everyone, I'm Elon Ma.", mention_author=True)
         else:
             await message.reply('unknown command!', mention_author=True)
 
